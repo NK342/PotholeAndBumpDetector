@@ -10,10 +10,7 @@ engine.say("Program initiated Velo at your service")
 engine.iterate()
 while engine.isBusy():
     time.sleep(0.05)
-# What to do with Taller or shorter road bikers
-# STEEP ROADS?!
 
-# t= TFmini('/dev/tty.usbserial-A506BOT5',mode=TFmini.STD_MODE)
 tf = TFmini('/dev/ttyS0', mode=TFmini.STD_MODE)
 print('=' * 25)
 print("\a")
@@ -35,21 +32,11 @@ try:
             engine.say("Oi! Move it!")
         time.sleep(2)
 
-        # Finding the average for the base to act as expectedvalue
         count = count+1
         if count % 30 == 0:
             print("resetting base")
             expectedDistance= currentdistance
 
-
-        # Sumofcurrentdistances = Sumofcurrentdistances + currentdistance
-        # Avg =  Sumofcurrentdistances / count
-        # expectedDistance = Avg
-
-        # The Base value: Distance between lidar and road
-        # If base= {0.45,049}: engine.sleep
-
-        # expectedDistance = 0.47
         difference = currentdistance - expectedDistance
 
         roadCondition = "Normal"
@@ -83,15 +70,8 @@ try:
             print("VERY DANGEROUS MOVE AWAY NOW : " + roadCondition)
             engine.say("L4 "+ roadCondition+" Stop Now " )
 
-        #     engine.say ("DANger DANgER!!!")
-        # print(dif)
-        # elif d < base:
-        #     print("bump")
-        #     engine.say("Speed Bump Ahoy!")
-
 except KeyboardInterrupt:
     engine.say("Buh BYE!")
-
     tf.close()
 
 engine.endLoop()
